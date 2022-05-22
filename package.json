@@ -1,0 +1,16 @@
+{
+  "name": "scrapple-lib",
+  "version": "0.1.0",
+  "description": "A library for a game that resembles Scrabble, but totally isn't",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "ts-node": "^10.8.0"
+  },
+  "scripts": {
+    "debug": "ts-node debug.ts"
+  },
+  "dependencies": {
+    "typescript": "^4.6.4"
+  }
+}
