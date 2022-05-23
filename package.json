@@ -5,10 +5,14 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
-    "ts-node": "^10.8.0"
+    "ts-node": "^10.8.0",
+    "husky": "^7.0.0"
   },
   "scripts": {
-    "debug": "ts-node debug.ts"
+    "debug": "ts-node debug.ts",
+    "prepare": "husky install",
+	"test": "echo test",
+	"format": "echo prettier"
   },
   "dependencies": {
     "typescript": "^4.6.4"
