@@ -1,7 +1,7 @@
 export enum Premium {
-  NONE,
-  DLS,
-  TLS,
-  DWS,
-  TWS,
+	NONE,
+	DLS,
+	TLS,
+	DWS,
+	TWS,
 }

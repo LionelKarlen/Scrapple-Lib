@@ -1,5 +1,5 @@
 export default interface Coordinate {
-  x: number;
-  y: number;
-  index: number;
+	x: number;
+	y: number;
+	index: number;
 }

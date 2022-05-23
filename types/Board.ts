@@ -1,3 +1,3 @@
-import { Tile } from "../lib/Tile";
+import { Tile } from '../lib/Tile';
 
-export type Board = Array<Tile>
+export type Board = Array<Tile>;

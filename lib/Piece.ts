@@ -1,9 +1,9 @@
 export class Piece {
-  letter: string;
-  points: number;
+	letter: string;
+	points: number;
 
-  constructor(letter: string, points: number) {
-    this.letter = letter;
-    this.points = points;
-  }
+	constructor(letter: string, points: number) {
+		this.letter = letter;
+		this.points = points;
+	}
 }
