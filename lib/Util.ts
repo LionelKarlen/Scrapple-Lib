@@ -1,5 +1,9 @@
 import Coordinate from '../types/Coordinate';
 import { Premium } from '../types/Premium';
+import { Language } from '../types/Language';
+import { Piece } from '..';
+import fs from 'fs';
+import path from 'path';
 export class Util {
 	constructor() {
 		throw new SyntaxError(
@@ -30,5 +34,38 @@ export class Util {
 			return Premium.TWS;
 		}
 		return Premium.NONE;
+	}
+
+	static getBag(language: Language): Array<Piece> {
+		const bag: Array<Piece> = [];
+		const bagData = JSON.parse(
+			fs.readFileSync(path.join('lang', language + '.json'), 'utf-8'),
+		);
+		bagData.forEach(
+			(element: { letter: string; amount: number; score: number }) => {
+				for (let i = 0; i < element.amount; i++) {
+					const pieceObj: Piece = {
+						letter: element.letter,
+						points: element.score,
+					};
+					bag.push(pieceObj);
+				}
+			},
+		);
+
+		// Fisher-Yates shuffle, thanks to https://bost.ocks.org/mike/shuffle/
+		let current = bag.length;
+		let tmpPiece: Piece;
+		let index: number;
+
+		while (current) {
+			index = Math.floor(Math.random() * current--);
+
+			tmpPiece = bag[current];
+			bag[current] = bag[index];
+			bag[index] = tmpPiece;
+		}
+
+		return bag;
 	}
 }
