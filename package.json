@@ -5,6 +5,10 @@
 	"main": "index.js",
 	"license": "MIT",
 	"devDependencies": {
+		"@typescript-eslint/eslint-plugin": "^5.26.0",
+		"@typescript-eslint/parser": "^5.26.0",
+		"eslint": "^8.16.0",
+		"eslint-config-prettier": "^8.5.0",
 		"husky": "^7.0.0",
 		"prettier": "^2.6.2",
 		"ts-node": "^10.8.0"
@@ -12,11 +16,11 @@
 	"scripts": {
 		"debug": "ts-node debug.ts",
 		"prepare": "husky install",
-		"lint": "echo lint",
+		"lint": "eslint .",
 		"format-check": "yarn prettier --check .",
 		"format-write": "yarn prettier --write ."
 	},
 	"dependencies": {
-		"typescript": "^4.6.4"
+		"typescript": "^4.7.2"
 	}
 }
