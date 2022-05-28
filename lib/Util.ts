@@ -1,9 +1,10 @@
 import Coordinate from '../types/Coordinate';
 import { Premium } from '../types/Premium';
 import { Language } from '../types/Language';
-import { Piece } from '..';
+import { Board, Piece } from '..';
 import fs from 'fs';
 import path from 'path';
+import MovePiece from '../types/MovePiece';
 export class Util {
 	constructor() {
 		throw new SyntaxError(
@@ -69,5 +70,28 @@ export class Util {
 		}
 
 		return bag;
+	}
+
+	static calculatePoints(board: Board, movePieces: Array<MovePiece>): number {
+		let wordScore = 0;
+		const wordPremiums = [];
+		/// Calculate letterScore, change board, calculate Premiums
+		for (let i = 0; i < movePieces.length; i++) {
+			let letterScore = 0;
+			const tile = board[movePieces[i].toCoordinate.index];
+			const premium = board[movePieces[i].toCoordinate.index].premium;
+			letterScore = tile.getPiece()?.points ?? 0;
+			if (premium < 4) {
+				letterScore *= premium;
+			} else {
+				wordPremiums.push(premium);
+			}
+			wordScore += letterScore;
+		}
+		/// Calculate wordScore Premiums
+		for (let i = 0; i < wordPremiums.length; i++) {
+			wordScore *= wordPremiums[i] - 2;
+		}
+		return wordScore;
 	}
 }

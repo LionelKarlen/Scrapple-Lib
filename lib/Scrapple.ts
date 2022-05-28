@@ -39,32 +39,16 @@ export default class Scrapple {
 	}
 
 	makeMove(move: Move) {
-		let wordScore = 0;
-		const wordPremiums = [];
 		/// Calculate letterScore, change board, calculate Premiums
 		for (let i = 0; i < move.movePieces.length; i++) {
-			let letterScore = 0;
 			this.board[move.movePieces[i].toCoordinate.index] =
 				new OccupiedTile(
 					move.movePieces[i].toCoordinate,
 					move.movePieces[i].piece,
 				);
-			const tile = this.board[move.movePieces[i].toCoordinate.index];
-			const premium =
-				this.board[move.movePieces[i].toCoordinate.index].premium;
-			letterScore = tile.getPiece()?.points ?? 1;
-			if (premium < 4) {
-				letterScore *= premium;
-			} else {
-				wordPremiums.push(premium);
-			}
-			wordScore += letterScore;
-		}
-		/// Calculate wordScore Premiums
-		for (let i = 0; i < wordPremiums.length; i++) {
-			wordScore *= wordPremiums[i] - 2;
 		}
 
+		const wordScore = Util.calculatePoints(this.board, move.movePieces);
 		this.players[move.player.index].score += wordScore;
 		/// Update player bag
 		if (this.bag.length > 7) {
