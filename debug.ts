@@ -1,5 +1,5 @@
 import Scrapple from './lib/Scrapple';
-import Move from './dist/types/Move';
+import Move from './types/Move';
 
 function main() {
 	const s: Scrapple = new Scrapple(2, 'en'); // Initialise new game
