@@ -16,10 +16,11 @@
 	},
 	"scripts": {
 		"debug": "ts-node debug.ts",
-		"prepare": "husky install",
+		"prepare": "husky install && tsc",
 		"lint": "eslint .",
 		"format-check": "yarn prettier --check .",
-		"format-write": "yarn prettier --write ."
+		"format-write": "yarn prettier --write .",
+		"build": "tsc -p ."
 	},
 	"dependencies": {
 		"typescript": "^4.7.2"
