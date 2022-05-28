@@ -11,8 +11,10 @@ export default class Scrapple {
 	board: Board;
 	players: Array<Player>;
 	bag: Array<Piece>;
+	running: boolean;
 
 	constructor(playercount: number, language: Language) {
+		/// Initialise Board
 		this.board = new Array(225);
 		for (let i = 0; i < this.board.length; i++) {
 			const coordinate: Coordinate = {
@@ -22,14 +24,18 @@ export default class Scrapple {
 			};
 			this.board[i] = new EmptyTile(coordinate);
 		}
+		/// Initialise Players
 		this.players = new Array(playercount);
 		for (let i = 0; i < playercount; i++) {
 			this.players[i] = new Player(i);
 		}
+		/// Initialise Bag
 		this.bag = Util.getBag(language);
 		for (let i = 0; i < this.players.length; i++) {
 			this.players[i].bench = this.bag.splice(0, 7);
 		}
+
+		this.running = true;
 	}
 
 	makeMove(move: Move) {
@@ -60,5 +66,22 @@ export default class Scrapple {
 		}
 
 		this.players[move.player.index].score += wordScore;
+		/// Update player bag
+		if (this.bag.length > 7) {
+			this.players[move.player.index].bench = this.bag.splice(
+				0,
+				7 - this.players[move.player.index].bench.length,
+			);
+		} else {
+			this.handleGameOver();
+		}
+	}
+
+	/// Return the winning player, based on who has the higher score
+	handleGameOver() {
+		const playerCopy = this.players;
+		const winner = playerCopy.sort((a, b) => b.score - a.score)[0];
+		this.running = false;
+		return winner;
 	}
 }

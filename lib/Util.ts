@@ -23,6 +23,7 @@ export class Util {
 	];
 	static readonly twsIndeces = [0, 7, 14, 105, 119, 210, 217, 224];
 
+	/// Set the Tile premiums based on the Tile coordinate
 	static getPremium(coordinate: Coordinate): Premium {
 		if (this.dlsIndeces.includes(coordinate.index)) {
 			return Premium.DLS;
@@ -36,6 +37,7 @@ export class Util {
 		return Premium.NONE;
 	}
 
+	/// Read the language file and generate the Piece bag
 	static getBag(language: Language): Array<Piece> {
 		const bag: Array<Piece> = [];
 		const bagData = JSON.parse(
