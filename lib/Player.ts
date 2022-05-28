@@ -1,4 +1,4 @@
-import { Piece } from '../lib/Piece';
+import { Piece } from './Piece';
 export default class Player {
 	name: string;
 	index: number;
