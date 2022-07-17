@@ -2,9 +2,8 @@ import Coordinate from '../types/Coordinate';
 import { Premium } from '../types/Premium';
 import { Language } from '../types/Language';
 import { Board, Piece } from '..';
-import fs from 'fs';
-import path from 'path';
 import MovePiece from '../types/MovePiece';
+import LangFiles from '../types/LangFiles';
 export class Util {
 	constructor() {
 		throw new SyntaxError(
@@ -39,11 +38,9 @@ export class Util {
 	}
 
 	/// Read the language file and generate the Piece bag
-	static getBag(language: Language): Array<Piece> {
+	static getBag(language: Language): Piece[] {
 		const bag: Array<Piece> = [];
-		const bagData = JSON.parse(
-			fs.readFileSync(path.join('lang', language + '.json'), 'utf-8'),
-		);
+		const bagData = LangFiles[language];
 		bagData.forEach(
 			(element: { letter: string; amount: number; score: number }) => {
 				for (let i = 0; i < element.amount; i++) {
